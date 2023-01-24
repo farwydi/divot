@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+option go_package = "github.com/farwydi/divot/pkg/warcraftlogs";
+
+message CharacterRankingPage {
+  uint32 page = 1;
+  bool hasMorePages = 2;
+  uint32 count = 3;
+  repeated Ranking rankings = 4;
+}
+
+message Ranking {
+  message Report {
+    string code = 1;
+    uint32 fightID = 2;
+    uint64 startTime = 3;
+  }
+
+  message Guild {
+    uint32 id = 1;
+    string name = 2;
+    int32 faction = 3;
+  }
+
+  message Server {
+    uint32 id = 1;
+    string name = 2;
+    string region = 3;
+  }
+
+  message Talents {
+    string name = 1;
+    uint32 id = 2;
+    uint32 talentID = 3;
+    uint32 points = 4;
+    string icon = 5;
+  }
+
+  message Gear {
+    string name = 1;
+    string quality = 2;
+    uint32 id = 3;
+    string icon = 4;
+    string itemLevel = 5;
+    repeated string bonusIDs = 6;
+  }
+
+  string name = 1;
+  string class = 2;
+  string spec = 3;
+  double amount = 4;
+  uint32 hardModeLevel = 5;
+  uint32 duration = 6;
+  uint64 startTime = 7;
+  Report report = 8;
+  Guild guild = 9;
+  Server server = 10;
+  uint32 bracketData = 11;
+  int32 faction = 12;
+  repeated uint32 affixes = 13;
+  string medal = 14;
+  double score = 15;
+  uint32 leaderboard = 16;
+  repeated Talents talents = 17;
+  repeated Gear gear = 18;
+}
