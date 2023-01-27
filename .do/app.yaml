@@ -1,35 +1,21 @@
 name: divot
 region: fra1
+databases:
+  - cluster_name: db-mongodb-fra1-99251
+    engine: MONGODB
+    name: db-mongodb-fra1-99251
+    production: true
+    version: "5"
 functions:
-  - name: data-provider
-    source_dir: function
+  - name: presets
     github:
       branch: main
       deploy_on_push: true
       repo: farwydi/divot
+    source_dir: /
+    routes:
+      - path: /
     envs:
-      - key: DB_ENDPOINT
-        scope: RUN_AND_BUILD_TIME
-        value: farwydi.s3.fr-par.scw.cloud
-      - key: DB_KEY
-        scope: RUN_AND_BUILD_TIME
-        type: SECRET
-        value: EV[1:yg2piBuow+f0udI7gN7W4dq7Eh+PTrUV:LpmjmlHW7tAuocvl1KJnbuPQqp1DRgPGiLSq+x7jKnChrMPr]
-      - key: DB_SECRET
-        scope: RUN_AND_BUILD_TIME
-        type: SECRET
-        value: EV[1:BcICPAnct//x5NN/LVh2g8SxZUSPr5Bd:SWK0Djfm05yYpkbv3+mbIDuqNTHMwXDIcURK5BkzzSQGxmZPpcW886033T/7W1hZfGP3aw==]
-      - key: DB_BUCKET
-        scope: RUN_AND_BUILD_TIME
-        value: farwydi
-      - key: DB_REGION
-        scope: RUN_AND_BUILD_TIME
-        value: fr-par
-      - key: WOWLOGS_CLIENT_ID
-        scope: RUN_AND_BUILD_TIME
-        type: SECRET
-        value: EV[1:vTRhmH6xeY5XqxLRDvDHiv8tqvj7euWK:CuSriXT6DpRf482rRPIJOrfF4G5VdkQSwyhLrm/ttjgTF5SSSby1H80QXxSkPxKJHjDG5Q==]
-      - key: WOWLOGS_CLIENT_SECRET
-        scope: RUN_AND_BUILD_TIME
-        type: SECRET
-        value: EV[1:nZbWx5PTfCo6GZQvYsiEBHM1GQSlJXme:2NB6Q1rqKpfCIFdF3DCppfVW3T4wEpmfon+Vs1RLnj7tlx7ZfvN2G+HAxY0/WSZh7mKPxwJITAE=]
+      - key: DATABASE_URL
+        scope: BUILD_TIME
+        value: "mongodb+srv://${db.USERNAME}:${db.PASSWORD}@${db.HOSTNAME}:${db.PORT}/${db.DATABASE}?authSource=admin&tls=true"

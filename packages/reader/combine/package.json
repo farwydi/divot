@@ -1,0 +1,14 @@
+{
+  "name": "combine",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/farwydi/divot.git"
+  },
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "combine data preset",
+  "main": "index.js",
+  "dependencies": {
+    "mongodb": "4.13"
+  }
+}

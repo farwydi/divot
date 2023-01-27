@@ -1,0 +1,7 @@
+environment:
+  MONGO_DB: "${DATABASE_URL}"
+packages:
+  - name: reader
+    actions:
+      - name: combine
+        runtime: nodejs:default
